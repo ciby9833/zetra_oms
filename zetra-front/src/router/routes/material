@@ -1,0 +1,70 @@
+import type { RouteRecordRaw } from 'vue-router';
+
+// 物料管理相关路由
+export const materialRoutes: RouteRecordRaw = {
+  path: 'material',
+  name: 'material',
+  component: () => import('@/layouts/RouterView.vue'),
+  redirect: { name: 'material-list' },
+  meta: {
+    title: '物料管理',
+    requiresAuth: true,
+    roles: ['admin', 'super_admin', 'user']
+  },
+  children: [
+    {
+      path: 'list',
+      name: 'material-list',
+      component: () => import('@/views/dashboard/material/MaterialListView.vue'),
+      meta: {
+        title: '物料列表',
+        requiresAuth: true,
+        roles: ['admin', 'super_admin', 'user'],
+        keepAlive: true,
+        componentName: 'MaterialListView'
+      }
+    },
+    {
+      path: 'form/:id?',
+      name: 'material-form',
+      component: () => import('@/views/dashboard/material/MaterialFormView.vue'),
+      meta: {
+        title: '编辑物料',
+        requiresAuth: true,
+        roles: ['admin', 'super_admin'],
+        keepAlive: true,
+        componentName: 'MaterialFormView'
+      }
+    },
+    {
+      path: 'category',
+      name: 'material-category',
+      component: () => import('@/views/dashboard/material/CategoryView.vue'),
+      meta: {
+        title: '物料分类',
+        requiresAuth: true,
+        roles: ['admin', 'super_admin']
+      }
+    },
+    {
+      path: 'unit',
+      name: 'material-unit',
+      component: () => import('@/views/dashboard/material/UnitView.vue'),
+      meta: {
+        title: '计量单位',
+        requiresAuth: true,
+        roles: ['admin', 'super_admin']
+      }
+    },
+    {
+      path: 'conversion',
+      name: 'material-conversion',
+      component: () => import('@/views/dashboard/material/ConversionView.vue'),
+      meta: {
+        title: '换算关系',
+        requiresAuth: true,
+        roles: ['admin', 'super_admin']
+      }
+    }
+  ]
+};

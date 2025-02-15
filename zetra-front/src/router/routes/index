@@ -1,0 +1,28 @@
+{
+  path: '/dashboard',
+  component: () => import('@/views/DashboardView.vue'),
+  children: [
+    // ... 其他路由
+    {
+      path: 'users',
+      name: 'Users',
+      component: () => import('@/views/dashboard/UsersView.vue'),
+      meta: {
+        requiresAuth: true,
+        roles: ['admin', 'super_admin'],  // 只允许管理员访问
+        title: '用户管理'
+      }
+    },
+    {
+      path: 'warehouse-zones',
+      name: 'warehouse-zones',
+      component: () => import('@/views/dashboard/WarehouseZoneView.vue'),
+      meta: {
+        requiresAuth: true,
+        roles: ['admin', 'super_admin'],  // 只允许管理员访问
+        title: '用户管理'
+      }
+    }
+    // ... 其他路由
+  ]
+}
